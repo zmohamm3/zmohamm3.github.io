@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zubair Mohammed | Data Engineer</title>
+  <meta name="description" content="Portfolio of Zubair Mohammed, Data Engineer specializing in cloud-native data platforms, ETL pipelines, and data warehousing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --bg-alt: #0f1522;
+      --card: #141b2b;
+      --border: #222c42;
+      --text: #e6ebf5;
+      --muted: #8d9ab5;
+      --accent: #38e1c6;
+      --accent-2: #5b8cff;
+      --radius: 14px;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+      --sans: "Inter", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.65; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    section { padding: 110px 24px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 48px; }
+    .section-title span, .accent { color: var(--accent); }
+
+    /* NAV */
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 50; background: rgba(10,14,23,.78); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1080px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { color: var(--muted); font-size: .95rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links .cta { color: var(--accent); border: 1px solid var(--accent); padding: 7px 16px; border-radius: 8px; }
+    .nav-links .cta:hover { background: var(--accent); color: var(--bg); }
+    .menu-btn { display: none; background: none; border: 0; color: var(--text); font-size: 1.6rem; cursor: pointer; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; position: relative; overflow: hidden; }
+    #hero::before { content: ""; position: absolute; width: 520px; height: 520px; right: -120px; top: 12%; background: radial-gradient(circle, rgba(91,140,255,.22), transparent 65%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .hello { font-family: var(--mono); color: var(--accent); margin-bottom: 8px; }
+    h1 { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; }
+    h2.role { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; color: var(--muted); margin: 10px 0 22px; }
+    .hero-text { color: var(--muted); max-width: 520px; font-size: 1.08rem; }
+    .btns { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; border: 1px solid var(--border); transition: transform .2s, background .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn.primary:hover { background: #5af0d8; }
+    .code-window { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); overflow: hidden; }
+    .code-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: #0d1320; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot:nth-child(1) { background: #ff5f57; } .dot:nth-child(2) { background: #febc2e; } .dot:nth-child(3) { background: #28c840; }
+    .code-bar .file { margin-left: 10px; }
+    pre#code { font-family: var(--mono); font-size: .86rem; padding: 20px; min-height: 290px; white-space: pre-wrap; color: #cbd5ee; }
+    .cursor { display: inline-block; width: 8px; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .k { color: #c792ea; } .s { color: #a5e075; } .c { color: #5c6b8a; } .f { color: #82aaff; }
+    .scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: .75rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; }
+
+    /* MARQUEE */
+    .marquee { border-block: 1px solid var(--border); background: var(--bg-alt); overflow: hidden; padding: 16px 0; }
+    .marquee-track { display: flex; width: max-content; animation: scroll 30s linear infinite; font-family: var(--mono); font-size: .85rem; letter-spacing: .15em; color: var(--muted); white-space: nowrap; }
+    .marquee-track span { padding-right: 24px; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .about-grid p { color: var(--muted); margin-bottom: 18px; font-size: 1.05rem; }
+    .badge { display: inline-block; margin-top: 8px; padding: 8px 14px; border: 1px solid var(--accent); color: var(--accent); border-radius: 8px; font-size: .88rem; font-weight: 500; }
+    .skills h3 { font-size: 1.1rem; margin-bottom: 20px; }
+    .skill-group { margin-bottom: 22px; }
+    .skill-group h4 { font-family: var(--mono); font-size: .8rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-family: var(--mono); font-size: .78rem; padding: 5px 11px; background: rgba(56,225,198,.08); color: var(--accent); border: 1px solid rgba(56,225,198,.2); border-radius: 6px; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--bg-alt); }
+    .timeline { position: relative; padding-left: 34px; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent), var(--accent-2), transparent); }
+    .job { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 28px; transition: border-color .25s, transform .25s; }
+    .job:hover { border-color: var(--accent); transform: translateX(4px); }
+    .job::before { content: ""; position: absolute; left: -35px; top: 34px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+    .job-date { font-family: var(--mono); font-size: .82rem; color: var(--accent); }
+    .job h3 { font-size: 1.3rem; margin: 4px 0; }
+    .job-loc { color: var(--muted); font-size: .9rem; margin-bottom: 14px; }
+    .job li { color: var(--muted); padding-left: 20px; position: relative; margin-bottom: 8px; }
+    .job li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+    .job .tags { margin-top: 18px; }
+
+    /* PROJECTS */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px; }
+    .project { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; transition: transform .25s, border-color .25s, box-shadow .25s; }
+    .project:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 20px 40px -20px rgba(56,225,198,.25); }
+    .project h3 { font-size: 1.2rem; margin-bottom: 12px; }
+    .project p { color: var(--muted); font-size: .95rem; flex: 1; margin-bottom: 18px; }
+    .project .link { margin-top: 20px; color: var(--accent); font-weight: 600; font-size: .92rem; }
+
+    /* EDUCATION */
+    #education { background: var(--bg-alt); }
+    .edu { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 26px 28px; }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .edu h3 { font-size: 1.2rem; }
+    .edu .yr { font-family: var(--mono); color: var(--accent); font-size: .85rem; }
+    .edu p { color: var(--muted); }
+
+    .project .link.static { color: var(--muted); font-weight: 500; }
+
+    /* CONTACT */
+    #contact { text-align: center; }
+    #contact p { color: var(--muted); max-width: 520px; margin: 0 auto 32px; font-size: 1.05rem; }
+    #email-link { display: block; margin-top: 22px; font-family: var(--mono); color: var(--accent); font-size: 1.05rem; }
+    button.btn { background: transparent; color: var(--text); cursor: pointer; font-family: inherit; font-size: 1rem; }
+
+    footer { text-align: center; padding: 36px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: .88rem; }
+    footer .socials { display: flex; justify-content: center; gap: 22px; margin-top: 10px; }
+    footer a:hover { color: var(--accent); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .menu-btn { display: block; }
+      .nav-links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--border); display: none; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 16px 24px; width: 100%; }
+      .nav-links .cta { border: 0; border-radius: 0; }
+      .scroll-hint { display: none; }
+      section { padding: 80px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====================== NAV ====================== -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">Zubair Mohammed<span class="accent">.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="cta">Get in Touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====================== HERO ====================== -->
+  <section id="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="hello">Hi, I'm</p>
+        <h1>Zubair Mohammed<span class="accent">.</span></h1>
+        <h2 class="role">Data Engineer</h2>
+        <p class="hero-text">Architecting cloud-native data platforms, batch and real-time pipelines, and enterprise data warehouses that turn raw data into reliable, decision-ready insight.</p>
+        <div class="btns">
+          <a href="#projects" class="btn primary">View Projects</a>
+            <a href="https://www.linkedin.com/in/mohammed-zubair-2b2048112/" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+            <a href="https://github.com/zmohamm3" target="_blank" rel="noopener" class="btn">GitHub</a>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="code-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">medallion.py</span></div>
+        <pre id="code"></pre>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll down</div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee"></div>
+  </div>
+
+  <!-- ====================== ABOUT ====================== -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title reveal">About Me<span>.</span></h2>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>Data Engineer with around 5 years of progressive experience architecting cloud-native data platforms, batch and real-time processing pipelines, and enterprise data warehouses across GCP, AWS, and Azure.</p>
+          <p>I specialize in delivering measurable improvements in pipeline reliability, query performance, and infrastructure cost. My recent work focuses on integrated data pipelines that feed warehouses, APIs, and BI dashboards.</p>
+          <span class="badge">IBM Data Analysis with Python · IBM Python for Data Science</span>
+        </div>
+        <div class="skills reveal">
+          <h3>Core Competencies</h3>
+          <div class="skill-group">
+            <h4>Cloud &amp; Data Warehousing</h4>
+            <div class="tags"><span class="tag">GCP</span><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">BigQuery</span><span class="tag">Snowflake</span><span class="tag">Redshift</span><span class="tag">Databricks</span></div>
+          </div>
+          <div class="skill-group">
+            <h4>Data Pipelines</h4>
+            <div class="tags"><span class="tag">Apache Airflow</span><span class="tag">dbt</span><span class="tag">Pentaho</span><span class="tag">IBM Cloud PAK</span><span class="tag">Qlik</span></div>
+          </div>
+          <div class="skill-group">
+            <h4>Databases</h4>
+            <div class="tags"><span class="tag">SQL Server</span><span class="tag">T-SQL</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">Azure Synapse</span><span class="tag">Data Lake</span></div>
+          </div>
+          <div class="skill-group">
+            <h4>BI</h4>
+            <div class="tags"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Looker</span></div>
+          </div>
+          <div class="skill-group">
+            <h4>Languages &amp; Tools</h4>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Spark SQL</span><span class="tag">Git</span><span class="tag">CI/CD</span><span class="tag">Docker</span><span class="tag">JIRA</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== EXPERIENCE ====================== -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title reveal">Experience<span>.</span></h2>
+      <div class="timeline">
+
+        <article class="job reveal">
+          <div class="job-date">06/2024 – Present</div>
+          <h3>Data Engineer @ PharmaEng Technology</h3>
+          <div class="job-loc">North Carolina</div>
+          <ul>
+            <li>Architected end-to-end ELT pipelines integrating 50+ data sources into BigQuery, achieving 99.9% uptime and 35% faster data delivery</li>
+            <li>Unified multiple ERP systems into one Synapse/Data Lake layer using parameterized ADF pipelines, Linked Services, and Mapping Data Flows</li>
+            <li>Put REST API endpoints into production for external apps by designing the JSON-based SQL views and stored procedures behind them</li>
+            <li>Cut load failures by building validation checks and load logging into T-SQL stored procedures</li>
+            <li>Delivered Power BI dashboards for weekly use, built on semantic models with Power Query and DAX over Synapse and BigQuery data</li>
+            <li>Kept vendor feeds running daily with SSIS packages and error handling for file-based exchange</li>
+          </ul>
+          <div class="tags"><span class="tag">Azure Data Factory</span><span class="tag">Synapse</span><span class="tag">BigQuery</span><span class="tag">T-SQL</span><span class="tag">SSIS</span><span class="tag">Power BI</span><span class="tag">DAX</span></div>
+        </article>
+
+        <article class="job reveal">
+          <div class="job-date">12/2020 – 08/2022</div>
+          <h3>SQL Engineer (promoted from SQL Intern) @ KPI Ninja by Health Catalyst Inc.</h3>
+          <div class="job-loc">Hyderabad, India</div>
+          <ul>
+            <li>Made reports up to 30% faster by reading execution plans, refactoring queries, and adding indexes</li>
+            <li>Hit 100% data accuracy on NCQA HEDIS reporting (FY 2021–2022) with optimized MS SQL Server queries</li>
+            <li>Locked down patient data to HIPAA standards through role-based access controls and permissions</li>
+            <li>Cut manual data ingestion by building Pentaho ETL workflows</li>
+            <li>Delivered Power BI dashboards for real-time healthcare KPIs</li>
+          </ul>
+          <div class="tags"><span class="tag">MS SQL Server</span><span class="tag">T-SQL</span><span class="tag">Pentaho</span><span class="tag">Power BI</span><span class="tag">HIPAA</span></div>
+        </article>
+
+        <article class="job reveal">
+          <div class="job-date">06/2018 – 10/2019</div>
+          <h3>Associate @ Tech Mahindra Ltd.</h3>
+          <div class="job-loc">Hyderabad, India</div>
+          <ul>
+            <li>Cut production incident resolution time by ~30% by analyzing SQL outputs to pinpoint data mismatches</li>
+            <li>Raised daily report accuracy by 20–25% with SQL extraction and update queries, and cut onboarding time by ~40% by documenting SQL logic and data flows</li>
+          </ul>
+          <div class="tags"><span class="tag">SQL</span><span class="tag">Data Analysis</span><span class="tag">Documentation</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== PROJECTS ====================== -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title reveal">Projects<span>.</span></h2>
+      <div class="project-grid">
+
+        <article class="project reveal">
+          <h3>Patient Readmission Prediction</h3>
+          <p>Predicts whether a diabetic patient will be readmitted within 30 days of discharge, using 100K+ hospital encounters. Compares Logistic Regression (base, class-weighted, SMOTE), Random Forest, and XGBoost; handling class imbalance noticeably improved recall, and XGBoost reached roughly 0.79 ROC-AUC.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span><span class="tag">SMOTE</span><span class="tag">Jupyter</span></div>
+          <a class="link" href="https://github.com/zmohamm3/patient-readmission-prediction" target="_blank" rel="noopener">Project Link →</a>
+        </article>
+
+        <article class="project reveal">
+          <h3>Self-Healing Data Pipeline</h3>
+          <p>A production-style Bronze/Silver/Gold pipeline that checks its own data quality. Schema drift, volume anomalies, null-rate spikes, and statistical outliers are caught automatically, bad records are quarantined, and alerts fire before bad data reaches the Gold layer.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Apache Airflow</span><span class="tag">Docker</span><span class="tag">Data Quality</span><span class="tag">Observability</span></div>
+          <a class="link" href="https://github.com/zmohamm3/self-healing-data-pipeline" target="_blank" rel="noopener">Project Link →</a>
+        </article>
+
+        <article class="project reveal">
+          <h3>GitHub Events Pipeline</h3>
+          <p>An end-to-end Medallion pipeline (Bronze/Silver/Gold) that ingests high-volume JSON events via REST APIs, cleanses them with SQL and Spark SQL, and serves partitioned PostgreSQL tables for BI and ML. Version-controlled in Git with CI/CD.</p>
+          <div class="tags"><span class="tag">Airflow</span><span class="tag">Docker</span><span class="tag">PostgreSQL</span><span class="tag">Spark SQL</span></div>
+          <a class="link" href="https://github.com/zmohamm3" target="_blank" rel="noopener">View on GitHub →</a>
+        </article>
+
+        <article class="project reveal">
+          <h3>Pentaho ETL Automation</h3>
+          <p>Cut manual workload by 80% (1–2 hours a day) with a scheduled Pentaho pipeline that loaded cleansed CSV data into SQL Server for Tableau dashboards. Built as a virtual client project.</p>
+          <div class="tags"><span class="tag">Pentaho</span><span class="tag">SQL Server</span><span class="tag">Tableau</span></div>
+          <span class="link static">Client project</span>
+        </article>
+
+        <!-- To add the IoT project, copy a card above and fill it in:
+        iot-telemetry-ai-pipeline -> https://github.com/zmohamm3/iot-telemetry-ai-pipeline -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== EDUCATION ====================== -->
+  <section id="education">
+    <div class="container">
+      <h2 class="section-title reveal">Education<span>.</span></h2>
+      <div class="edu-grid">
+        <div class="edu reveal">
+          <h3>Master's in Information Technology</h3>
+          <div class="yr">2024</div>
+          <p>Valparaiso University, Valparaiso, IN</p>
+        </div>
+        <div class="edu reveal">
+          <h3>Bachelor of Engineering, Computer Science</h3>
+          <div class="yr">2018</div>
+          <p>Jawaharlal Nehru Technological University, Hyderabad, India</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== CONTACT ====================== -->
+  <section id="contact">
+    <div class="container reveal">
+      <h2 class="section-title">Let's Build Something<span>.</span></h2>
+      <p>Based in Chicago, IL, and currently open to new opportunities. Whether you have a question or just want to say hi, I'll do my best to get back to you.</p>
+      <button class="btn" id="revealEmail">Reveal Email Address</button>
+      <a id="email-link" href="#"></a>
+    </div>
+  </section>
+
+  <footer>
+    <div>Designed &amp; Built by Zubair Mohammed</div>
+    <div class="socials">
+      <a href="https://github.com/zmohamm3" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/mohammed-zubair-2b2048112/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    /* ============ EDIT ME ============ */
+    // Email is split so scrapers don't pick it up. Change these two values.
+    const EMAIL_USER = "zubair.md2403";
+    const EMAIL_DOMAIN = "gmail.com";
+
+    // Words scrolling in the banner under the hero
+    const MARQUEE_WORDS = ["Data Engineering", "Cloud Platforms", "ETL / ELT Pipelines", "Data Warehousing", "SQL", "Business Intelligence"];
+
+    // Lines typed in the hero code window. Use <span class="k|s|c|f"> for colors.
+    const CODE_LINES = [
+      '<span class="k">import</span> pandas <span class="k">as</span> pd',
+      '',
+      '<span class="k">def</span> <span class="f">run_medallion</span>(events):',
+      '    <span class="c"># bronze: raw JSON, as received</span>',
+      '    bronze = pd.json_normalize(events)',
+      '    <span class="c"># silver: cleanse + dedupe</span>',
+      '    silver = bronze.dropna(subset=[<span class="s">"id"</span>]).drop_duplicates(<span class="s">"id"</span>)',
+      '    <span class="c"># gold: BI-ready, partitioned</span>',
+      '    gold = silver.groupby(<span class="s">"event_date"</span>).size()',
+      '    <span class="k">return</span> gold'
+    ];
+    /* ================================= */
+
+    // Mobile menu
+    const navLinks = document.getElementById("navLinks");
+    document.getElementById("menuBtn").addEventListener("click", () => navLinks.classList.toggle("open"));
+    navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
+
+    // Marquee (content is doubled so the loop is seamless)
+    const track = document.getElementById("marquee");
+    const line = MARQUEE_WORDS.map(w => `<span>${w.toUpperCase()} •</span>`).join("");
+    track.innerHTML = line + line + line + line;
+
+    // Typewriter code window
+    const codeEl = document.getElementById("code");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      codeEl.innerHTML = CODE_LINES.join("\n");
+    } else {
+      let lineIdx = 0, charIdx = 0, shown = "";
+      const cursor = '<span class="cursor"></span>';
+      function plainLength(html) { return html.replace(/<[^>]+>/g, "").length; }
+      function slice(html, n) {
+        // Return the first n visible characters while keeping tags balanced
+        let out = "", visible = 0, i = 0, open = 0;
+        while (i < html.length && visible < n) {
+          if (html[i] === "<") {
+            const end = html.indexOf(">", i);
+            const tag = html.slice(i, end + 1);
+            out += tag;
+            open += tag.startsWith("</") ? -1 : 1;
+            i = end + 1;
+          } else { out += html[i]; visible++; i++; }
+        }
+        return out + "</span>".repeat(Math.max(open, 0));
+      }
+      function type() {
+        if (lineIdx >= CODE_LINES.length) { codeEl.innerHTML = shown + cursor; return; }
+        const full = CODE_LINES[lineIdx];
+        codeEl.innerHTML = shown + slice(full, charIdx) + cursor;
+        if (charIdx < plainLength(full)) { charIdx++; setTimeout(type, 28); }
+        else { shown += full + "\n"; lineIdx++; charIdx = 0; setTimeout(type, 140); }
+      }
+      type();
+    }
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Reveal email
+    document.getElementById("revealEmail").addEventListener("click", function () {
+      const addr = EMAIL_USER + "@" + EMAIL_DOMAIN;
+      const link = document.getElementById("email-link");
+      link.textContent = addr;
+      link.href = "mailto:" + addr;
+      this.style.display = "none";
+    });
+  </script>
+</body>
+</html>
